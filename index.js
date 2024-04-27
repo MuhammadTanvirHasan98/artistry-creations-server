@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -39,6 +39,16 @@ async function run() {
     // await client.connect();
 
     const allCraftsCollection = client.db("allCraftsDB").collection("allCrafts")
+
+
+     
+
+   // get all crafts data from database and send to client side 
+    app.get('/allCrafts', async(req, res)=>{
+        const result = await allCraftsCollection.find().toArray();
+        res.send(result);
+    })
+
 
    // Insert each craft from client side to database through post method
     app.post('/allCrafts', async(req, res)=>{
