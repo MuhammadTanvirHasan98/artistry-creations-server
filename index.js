@@ -40,6 +40,8 @@ async function run() {
 
     const allCraftsCollection = client.db("allCraftsDB").collection("allCrafts")
 
+    const  subcategoriesCollection = client.db("allCraftsDB").collection("subcategories")
+
 
      
 
@@ -60,7 +62,7 @@ async function run() {
 
 
   //  get  crafts data from database for user by email and send to client side 
-   app.get('/allCrafts-email/:email', async(req, res)=>{
+   app.get('/allCrafts/email/:email', async(req, res)=>{
     const email = req.params.email;
     console.log(email)
     const query = {user_email: email}
@@ -76,6 +78,12 @@ async function run() {
         res.send(result);
     })
 
+
+    // get subcategories data from database and sent to client 
+    app.get('/subcategories', async(req, res)=>{
+      const result = await subcategoriesCollection.find().toArray();
+      res.send(result);
+    })
 
 
 
