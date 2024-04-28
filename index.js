@@ -58,6 +58,16 @@ async function run() {
      res.send(result);
  })
 
+
+  //  get  crafts data from database for user by email and send to client side 
+   app.get('/allCrafts-email/:email', async(req, res)=>{
+    const email = req.params.email;
+    console.log(email)
+    const query = {user_email: email}
+    const result = await allCraftsCollection.find(query).toArray();
+     res.send(result);
+ })
+
    // Insert each craft from client side to database through post method
     app.post('/allCrafts', async(req, res)=>{
         const craft = req.body;
