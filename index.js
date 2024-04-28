@@ -49,6 +49,14 @@ async function run() {
         res.send(result);
     })
 
+   // get single craft data from database and send to client side 
+   app.get('/allCrafts/:id', async(req, res)=>{
+    const id = req.params.id;
+    console.log(id)
+    const query = {_id: new ObjectId(id)}
+    const result = await allCraftsCollection.findOne(query);
+     res.send(result);
+ })
 
    // Insert each craft from client side to database through post method
     app.post('/allCrafts', async(req, res)=>{
