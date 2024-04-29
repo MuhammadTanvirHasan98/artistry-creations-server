@@ -10,17 +10,6 @@ app.use(express.json());
 
 const port = 4000;
 
-// const users =[
-//   {name:"Muhammad", age:26},
-//   {name:"Tanvir", age:26},
-//   {name:"Hasan", age:26}
-// ]
-// app.get('/users', (req, res)=>{
-//    res.send(users);
-// })
-
-
-
 
 const uri = "mongodb+srv://tanhasan1998:muhammad98@muhammadcluster.h7migjc.mongodb.net/?retryWrites=true&w=majority&appName=MuhammadCluster";
 
@@ -86,6 +75,14 @@ async function run() {
     })
 
 
+    // get single craft data from database and send to client side 
+   app.delete('/allCrafts/:id', async(req, res)=>{
+    const id = req.params.id;
+    console.log(id)
+    const query = {_id: new ObjectId(id)}
+    const result = await allCraftsCollection.deleteOne(query);
+     res.send(result);
+ })
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
